@@ -8,6 +8,15 @@
 //IIFE - Immediately Invoked Function Expression
 (function(){
 
+    // create fixed bottom nav bar
+    let BottomNavBar = `<nav class="navbar fixed-bottom navbar-light  bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fixed bottom</a>
+        </div>
+    </nav>`;
+    // place the fixed bottom nav bar at bottom position of page
+    document.body.insertAdjacentHTML("beforeEnd", BottomNavBar);
+
     // register the function in IIFE
     /**
      * Start the web-app.
@@ -36,6 +45,9 @@
             case "Human Resource":
                 DisplayHumanResourcePage();
                 break;
+            case "Projects":
+                DisplayProjectPage();
+                break;
         }
     }
 
@@ -47,6 +59,16 @@
      * It controls four buttons and displays welcome messages and the background image.
      */
     function DisplayHomePage() {
+
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+        //let product = document.getElementById("Product");
+        //product.innerHTML.replace("Product", " Project");
+
         let AboutUsButton = document.getElementById("AboutUsBtn");
         AboutUsButton.addEventListener("click", function () {
             console.log("About Us Button Clicked");
@@ -89,7 +111,24 @@
         MainContent.appendChild(MainParagraph);
 
         // add background image
-        document.body.style.backgroundImage = "url('home_background.jpg')";
+        document.body.style.backgroundImage = "url('Images/home_background.jpg')";
+
+    }
+
+
+    /**
+     * It is called when the current page's title is Products.
+     *
+     */
+    function DisplayProductPage() {
+
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+        //location.href = "project.html"
 
     }
 
@@ -98,17 +137,28 @@
      *
      *
      */
-    function DisplayProductPage() {
+    function DisplayProjectPage(){
 
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
     }
-
 
     /**
      * It is called when the current page's title is Service.
      * It displays three services that we can offer.
      */
     function DisplayServicePage() {
+
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
 
         // create main section
         let MainContent = document.getElementsByTagName("main")[0];
@@ -133,7 +183,7 @@
         First_Paragraph.innerHTML = First_Service + '<br/>' + First_Description;
         // create image tag named First_image and set its attributes
         let First_image = document.createElement("img");
-        First_image.src = "webpage.png";
+        First_image.src = "Images/webpage.png";
         First_image.style.height = "150px";
         // first div section includes image and paragraph
         First_Section.appendChild(First_image);
@@ -160,7 +210,7 @@
         Second_Paragraph.innerHTML = Second_Service + '<br/>' + Second_Description;
         // create image tag named Second_image and set its attributes
         let Second_image = document.createElement("img");
-        Second_image.src = "algorithm.png";
+        Second_image.src = "Images/algorithm.png";
         Second_image.style.height = "150px";
         // second div section includes image and paragraph
         Second_Section.appendChild(Second_image);
@@ -187,7 +237,7 @@
         Third_Paragraph.innerHTML = Third_Service + '<br/>' + Third_Description;
         // create image tag named Third_image and set its attributes
         let Third_image = document.createElement("img");
-        Third_image.src = "program.png";
+        Third_image.src = "Images/program.png";
         Third_image.style.height = "150px";
         // third div section includes image and paragraph
         Third_Section.appendChild(Third_image);
@@ -201,11 +251,18 @@
 
 
     /**
-     *
+     * It is called when the current page's title is Contact Us.
      *
      */
     function DisplayContactPage() {
         console.log("Display Contact Us Page");
+
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
 
 
         let sendButton = document.getElementById("sendButton");
@@ -227,31 +284,69 @@
 
 
     /**
-     *
+     * It is called when the current page's title is About Us.
      *
      */
     function DisplayAboutPage() {
 
+        console.log("Display About Page called");
 
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+
+        let Main = document.getElementsByTagName("main")[0];
+        let Section = document.createElement("div");
+        Section.setAttribute("id", "Section1");
+        Section.style.height = "1300px";
+
+        let FirstParagraph = document.createElement("p");
+        FirstParagraph.setAttribute("class", "mb-5");
+        FirstParagraph.innerHTML = `Few things about us <br/> We are currently enrolled in Durham College `;
+
+        let FirstImage = document.createElement("img");
+        FirstImage.src = "Images/personal2.png";
+        FirstImage.style.width = "500px";
+        FirstImage.style.height = "400px";
+
+        Section.appendChild(FirstImage);
+        Section.appendChild(FirstParagraph);
+
+        let SecondParagraph = document.createElement("p");
+        SecondParagraph.setAttribute("class", "mb-5");
+        SecondParagraph.innerHTML = `We are Programmers who are always looking for ways to solve your problems`;
+        let SecondImage = document.createElement("img");
+        SecondImage.src= "Images/aboutus.png";
+        SecondImage.style.width = "800px";
+        SecondImage.style.height = "500px";
+        Section.appendChild(SecondImage);
+        Section.appendChild(SecondParagraph);
+
+        Main.appendChild(Section);
 
     }
 
 
     /**
-     *
+     * It is called when the current page's title is Human Resource.
      *
      */
     function DisplayHumanResourcePage() {
 
-
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
     }
 
-    // add a nav bar element human resource
-    let Contact_Us = document.getElementsByTagName("li")[4];
-    let Human_Resources = document.createElement("a");
-    Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
-    Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+    // change the product's link to project page
+    let product = document.getElementsByTagName("li")[1];
+    product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Product</a>`;
 
 })();
 

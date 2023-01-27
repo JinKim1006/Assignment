@@ -8,5 +8,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3"
-  }
+  },
+  "repository": "https://github.com/JinKim1006/Assignment.git",
+  "author": "Jin <kimsj7367@gmail.com>"
 }
