@@ -8,6 +8,8 @@
 //IIFE - Immediately Invoked Function Expression
 (function(){
 
+
+
     // create fixed bottom nav bar
     let BottomNavBar = `<nav class="navbar fixed-bottom navbar-light  bg-secondary">
         <div class="container-fluid">
@@ -60,35 +62,16 @@
      */
     function DisplayHomePage() {
 
+        // change the product's link to project page
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
         Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
-        //let product = document.getElementById("Product");
-        //product.innerHTML.replace("Product", " Project");
-
-        let AboutUsButton = document.getElementById("AboutUsBtn");
-        AboutUsButton.addEventListener("click", function () {
-            console.log("About Us Button Clicked");
-            location.href = "about.html"
-        });
-        let ProductButton = document.getElementById("ProductBtn");
-        ProductButton.addEventListener("click", function () {
-            console.log("About Us Button Clicked");
-            location.href = "products.html"
-        });
-        let ServiceButton = document.getElementById("ServiceBtn");
-        ServiceButton.addEventListener("click", function () {
-            console.log("About Us Button Clicked");
-            location.href = "services.html"
-        });
-        let ContactUsButton = document.getElementById("ContactUsBtn");
-        ContactUsButton.addEventListener("click", function() {
-            console.log("About Us Button Clicked");
-            location.href = "contact.html"
-        });
 
         // create a main tag as MainContent
         let MainContent = document.getElementsByTagName("main")[0];
@@ -128,8 +111,6 @@
         Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
-        //location.href = "project.html"
-
     }
 
 
@@ -139,11 +120,61 @@
      */
     function DisplayProjectPage(){
 
+        // change the product's link to project page
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link active" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
         Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+        //ensure to get and create the elements needed for the sections, paragraphs and images.
+        let MainContent = document.getElementsByTagName("main")[0];
+
+        let Section = document.createElement("div");
+        Section.style.height = "2000px";
+        let FirstHeading = document.createElement("h3");
+        FirstHeading.innerHTML = `These are some of the Projects we have worked on.`;
+        let UnorderedList = document.createElement("ul");
+        let firstList = document.createElement("li");
+        let secondList = document.createElement("li");
+        let thirdList = document.createElement("li");
+        let firstParagraph = document.createElement("p");
+        firstParagraph.innerHTML = `We have worked together as a team to develop a use case diagram for a Movie Rental Store.`;
+        let FirstImage = document.createElement("img");
+        FirstImage.src = "Images/personal1.png";
+        FirstImage.style.width = "600px";
+        FirstImage.style.height = "600px";
+        let SecondParagraph = document.createElement("p");
+        SecondParagraph.innerHTML = `We have created Object-Oriented Programs using languages like JAVA.`;
+        let SecondImage = document.createElement("img");
+        SecondImage.src = "Images/personal3.png";
+        SecondImage.style.height = "400px";
+        SecondImage.style.width = "1200px";
+        let ThirdParagraph = document.createElement("p");
+        ThirdParagraph.innerHTML = `We have also worked together and developed projects using the C# language in Identity Framework <br/> and deployed it on azure.`;
+        let ThirdImage = document.createElement("img");
+        ThirdImage.src = "Images/azure.png";
+        ThirdImage.style.width = "900px";
+        ThirdImage.style.height = "600px";
+
+        //after assigning the values ensure to appendchiild to the elements in the right order.
+        UnorderedList.appendChild(firstList);
+        UnorderedList.appendChild(secondList);
+        UnorderedList.appendChild(thirdList);
+        firstList.appendChild(firstParagraph);
+        firstList.appendChild(FirstImage);
+        secondList.appendChild(SecondParagraph);
+        secondList.appendChild(SecondImage);
+        thirdList.appendChild(ThirdParagraph);
+        thirdList.appendChild(ThirdImage);
+        Section.appendChild(FirstHeading);
+        Section.appendChild(firstList);
+        Section.appendChild(secondList);
+        Section.appendChild(thirdList);
+        MainContent.appendChild(Section);
 
     }
 
@@ -152,6 +183,10 @@
      * It displays three services that we can offer.
      */
     function DisplayServicePage() {
+
+        // change the product's link to project page
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
@@ -257,6 +292,10 @@
     function DisplayContactPage() {
         console.log("Display Contact Us Page");
 
+        // change the product's link to project page
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
@@ -279,7 +318,16 @@
                     localStorage.setItem(key, contact.serialize());
                 }
             }
+            let time = 3000;
+            let link = location.href = "index.html";
+            let timeOut;
+            function Redirect() {
+                timeOut = window.setTimeout("location.href = link", time);
+            }
         });
+        sendButton.addEventListener("click", Redirect());
+
+
     }
 
 
@@ -290,6 +338,10 @@
     function DisplayAboutPage() {
 
         console.log("Display About Page called");
+
+        // change the product's link to project page
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
@@ -336,6 +388,10 @@
      */
     function DisplayHumanResourcePage() {
 
+        // change the product's link to project page
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
@@ -344,9 +400,7 @@
 
     }
 
-    // change the product's link to project page
-    let product = document.getElementsByTagName("li")[1];
-    product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Product</a>`;
+
 
 })();
 
