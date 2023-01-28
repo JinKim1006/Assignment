@@ -2,10 +2,11 @@
 
 
 class Contact {
-    constructor(fullName, contactNumber, emailAddress) {
+    constructor(fullName, contactNumber, emailAddress, message) {
         this.FullName = fullName;
         this.ContactNumber = contactNumber;
         this.EmailAddress = emailAddress;
+        this.Message = message;
     }
 
     // setter and getter for fullName
@@ -32,13 +33,21 @@ class Contact {
         return this.m_emailaddress;
     }
 
+    // setter and getter for message
+    set Message(message){
+        this.m_message = message;
+    }
+    get Message(){
+        return this.m_message;
+    }
+
     toString(){
-        return `Full Name: ${this.FullName}\n Contact Number: ${this.ContactNumber}\n Email Address: ${this.EmailAddress}`;
+        return `Full Name: ${this.FullName}\n Contact Number: ${this.ContactNumber}\n Email Address: ${this.EmailAddress}\n Message: ${this.Message}`;
     }
 
     serialize(){
         if(this.FullName !== "" && this.ContactNumber !== "" && this.EmailAddress !== ""){
-            return `${this.FullName}, ${this.ContactNumber}, ${this.EmailAddress}`;
+            return `${this.FullName}, ${this.ContactNumber}, ${this.EmailAddress}, ${this.Message}`;
         }
         console.error("One or more of the properties of the Contact object are missing or invalid");
         return null;
@@ -49,6 +58,7 @@ class Contact {
         this.FullName = propertyArray[0];
         this.ContactNumber = propertyArray[1];
         this.EmailAddress = propertyArray[2];
+        this.Message = propertyArray[3];
     }
 
 }

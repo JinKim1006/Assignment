@@ -8,8 +8,6 @@
 //IIFE - Immediately Invoked Function Expression
 (function(){
 
-
-
     // create fixed bottom nav bar
     let BottomNavBar = `<nav class="navbar fixed-bottom navbar-light  bg-secondary">
         <div class="container-fluid">
@@ -40,6 +38,9 @@
                 break;
             case "Contact Us":
                 DisplayContactPage();
+                break;
+            case "Contact List":
+                DisplayContactListPage();
                 break;
             case "About Us":
                 DisplayAboutPage();
@@ -101,7 +102,6 @@
 
     /**
      * It is called when the current page's title is Products.
-     *
      */
     function DisplayProductPage() {
 
@@ -115,8 +115,8 @@
 
 
     /**
-     *
-     *
+     * It is called when the current page's title is Projects.
+     * It displays 3 projects that we completed.
      */
     function DisplayProjectPage(){
 
@@ -135,45 +135,56 @@
 
         let Section = document.createElement("div");
         Section.style.height = "2000px";
+
         let FirstHeading = document.createElement("h3");
         FirstHeading.innerHTML = `These are some of the Projects we have worked on.`;
+
         let UnorderedList = document.createElement("ul");
         let firstList = document.createElement("li");
         let secondList = document.createElement("li");
         let thirdList = document.createElement("li");
+
         let firstParagraph = document.createElement("p");
         firstParagraph.innerHTML = `We have worked together as a team to develop a use case diagram for a Movie Rental Store.`;
+
         let FirstImage = document.createElement("img");
         FirstImage.src = "Images/personal1.png";
         FirstImage.style.width = "600px";
         FirstImage.style.height = "600px";
+
         let SecondParagraph = document.createElement("p");
         SecondParagraph.innerHTML = `We have created Object-Oriented Programs using languages like JAVA.`;
+
         let SecondImage = document.createElement("img");
         SecondImage.src = "Images/personal3.png";
         SecondImage.style.height = "400px";
         SecondImage.style.width = "1200px";
+
         let ThirdParagraph = document.createElement("p");
         ThirdParagraph.innerHTML = `We have also worked together and developed projects using the C# language in Identity Framework <br/> and deployed it on azure.`;
+
         let ThirdImage = document.createElement("img");
         ThirdImage.src = "Images/azure.png";
         ThirdImage.style.width = "900px";
         ThirdImage.style.height = "600px";
 
-        //after assigning the values ensure to appendchiild to the elements in the right order.
+        //after assigning the values ensure to appendChild to the elements in the right order.
         UnorderedList.appendChild(firstList);
         UnorderedList.appendChild(secondList);
         UnorderedList.appendChild(thirdList);
+
         firstList.appendChild(firstParagraph);
         firstList.appendChild(FirstImage);
         secondList.appendChild(SecondParagraph);
         secondList.appendChild(SecondImage);
         thirdList.appendChild(ThirdParagraph);
         thirdList.appendChild(ThirdImage);
+
         Section.appendChild(FirstHeading);
         Section.appendChild(firstList);
         Section.appendChild(secondList);
         Section.appendChild(thirdList);
+
         MainContent.appendChild(Section);
 
     }
@@ -287,7 +298,7 @@
 
     /**
      * It is called when the current page's title is Contact Us.
-     *
+     * Users can submit their information using the pre-made form.
      */
     function DisplayContactPage() {
         console.log("Display Contact Us Page");
@@ -302,38 +313,60 @@
         Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
-
-
+        // get the send button element
         let sendButton = document.getElementById("sendButton");
-        let subscribeCheckbox = document.getElementById("subscribeCheckbox");
 
+        // when the submit button is clicked, called the function
         sendButton.addEventListener("click", function(event)
         {
-            if(subscribeCheckbox.checked){
-                console.log("Checkbox checked!")
+            console.log("Send Button clicked!")
 
-                let contact = new Contact(fullName.value, contactNumber.value, emailAddress.value);
-                if(contact.serialize()){
-                    let key = contact.FullName.substring(0,1) + Date.now();
-                    localStorage.setItem(key, contact.serialize());
-                }
+            // create new contact object with entered values
+            let contact = new Contact(fullName.value, contactNumber.value, emailAddress.value, message.value);
+            // store the values in local storage and display the entered values in table
+            if(contact.serialize()){
+                let key = contact.FullName.substring(0,1) + Date.now();
+                localStorage.setItem(key, contact.serialize());
+                location.href = "contact-list.html";
             }
-            let time = 3000;
-            let link = location.href = "index.html";
-            let timeOut;
-            function Redirect() {
-                timeOut = window.setTimeout("location.href = link", time);
-            }
+            // after 3 seconds, redirect to the home page
+            setTimeout("location.href='https://jinkim1006.github.io/Assignment/index.html'", 3000);
         });
-        sendButton.addEventListener("click", Redirect());
-
-
     }
 
+    /**
+     * It is called when the current page's title is Contact List.
+     * It creates a table using submitted values.
+     */
+    function DisplayContactListPage() {
+        console.log("Display Contact List Page");
+
+        if(localStorage.length > 0){
+            let contactList = document.getElementById("contactList");
+            let data = "";  // add deserialize data from localStorage
+
+            let keys = Object.keys(localStorage);  // return a string array of keys
+
+            let index = 1;
+            for(const key of keys){
+                let contactData = localStorage.getItem(key);
+                let contact = new Contact();
+                contact.deserialize(contactData);
+                data += `<tr><th scope="row" class="text-center">${index}</th>
+                         <td>${contact.FullName}</td>
+                         <td>${contact.ContactNumber}</td>
+                         <td>${contact.EmailAddress}</td>
+                         <td>${contact.Message}</td>
+                         <td></td>
+                         </tr>`;
+                index++;
+            }
+            contactList.innerHTML = data;
+        }
+    }
 
     /**
      * It is called when the current page's title is About Us.
-     *
      */
     function DisplayAboutPage() {
 
@@ -349,34 +382,40 @@
         Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
-
+        // create main section
         let Main = document.getElementsByTagName("main")[0];
+        // create div section and set its attribute and height
         let Section = document.createElement("div");
         Section.setAttribute("id", "Section1");
         Section.style.height = "1300px";
 
+        // create a paragraph and store text in it
         let FirstParagraph = document.createElement("p");
         FirstParagraph.setAttribute("class", "mb-5");
         FirstParagraph.innerHTML = `Few things about us <br/> We are currently enrolled in Durham College `;
-
+        // create an image tag and assign the image with its size
         let FirstImage = document.createElement("img");
         FirstImage.src = "Images/personal2.png";
         FirstImage.style.width = "500px";
         FirstImage.style.height = "400px";
-
+        // div section includes first image and first paragraph
         Section.appendChild(FirstImage);
         Section.appendChild(FirstParagraph);
 
+        // create a paragraph and store text in it
         let SecondParagraph = document.createElement("p");
         SecondParagraph.setAttribute("class", "mb-5");
         SecondParagraph.innerHTML = `We are Programmers who are always looking for ways to solve your problems`;
+        // create an image tag and assign the image with its size
         let SecondImage = document.createElement("img");
         SecondImage.src= "Images/aboutus.png";
         SecondImage.style.width = "800px";
         SecondImage.style.height = "500px";
+        // div section includes second image and second paragraph
         Section.appendChild(SecondImage);
         Section.appendChild(SecondParagraph);
 
+        // main section includes the div section
         Main.appendChild(Section);
 
     }
@@ -384,7 +423,6 @@
 
     /**
      * It is called when the current page's title is Human Resource.
-     *
      */
     function DisplayHumanResourcePage() {
 
@@ -399,8 +437,6 @@
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
     }
-
-
 
 })();
 
