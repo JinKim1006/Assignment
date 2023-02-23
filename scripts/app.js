@@ -105,12 +105,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
 
@@ -148,7 +148,7 @@
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
     }
@@ -162,12 +162,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link active" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link active" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
         //ensure to get and create the elements needed for the sections, paragraphs and images.
@@ -237,12 +237,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
 
@@ -400,12 +400,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
         ContactFormValidation();
@@ -471,13 +471,13 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html">
+        product.innerHTML = `<a class="nav-link" href="project.html">
                             <i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html">' +
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html">' +
                                     '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
@@ -527,13 +527,13 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html">
+        product.innerHTML = `<a class="nav-link" href="project.html">
                                 <i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="../humanResource.html">' +
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html">' +
                                     '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
@@ -542,13 +542,13 @@
     function DisplayRegisterPage(){
         console.log("Display Register Page Called!");
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html">
+        product.innerHTML = `<a class="nav-link" href="project.html">
                                 <i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="../humanResource.html">' +
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html">' +
             '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
@@ -595,13 +595,13 @@
     function DisplayLoginPage(){
         console.log("Display Login Page Called!");
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="../project.html">
+        product.innerHTML = `<a class="nav-link" href="project.html">
                                 <i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="../humanResource.html">' +
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html">' +
             '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
