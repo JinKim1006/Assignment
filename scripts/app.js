@@ -548,10 +548,9 @@
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html">' +
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html">' +
             '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
-
 
         let messageArea = $("#messageArea");
         messageArea.hide();
@@ -601,7 +600,7 @@
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html">' +
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html">' +
             '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
