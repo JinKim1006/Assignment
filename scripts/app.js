@@ -17,6 +17,37 @@
     // place the fixed bottom nav bar at bottom position of page
     document.body.insertAdjacentHTML("beforeEnd", BottomNavBar);
 
+
+    function AjaxRequest(method, url, callback){
+        // STEP 1
+        let xhr = new XMLHttpRequest();
+
+        // STEP 2
+        xhr.addEventListener("readystatechange", () => {
+
+            if(xhr.readyState === 4 && xhr.status === 200){
+                if(typeof callback === "function"){     // check the callback's type is function
+                    callback(xhr.responseText);
+                }else{
+                    console.error("Error: Please provide a valid function for callback.");
+                }
+            }
+        });
+
+        // STEP 3
+        xhr.open(method, url);
+        // STEP 4
+        xhr.send();
+    }
+
+    function LoadHeader(data){
+        //console.log(xhr.responseType);
+        $("header").html(data);
+        $(`li>a:contains(${document.title})`).addClass("active");
+        CheckLogin();
+    }
+
+
     // register the function in IIFE
     /**
      * Start the web-app.
@@ -25,6 +56,9 @@
     function Start()
     {
         console.log("App Started!"); // print the statement to check the process
+        //AjaxRequest("GET", "header.html", LoadHeader);
+        CheckLogin();
+
         switch(document.title)  // based on the title of the current page, calls a function
         {
             case "Home":
@@ -51,6 +85,12 @@
             case "Projects":
                 DisplayProjectPage();
                 break;
+            case "Register":
+                DisplayRegisterPage();
+                break;
+            case "Login":
+                DisplayLoginPage();
+                break;
         }
     }
 
@@ -65,12 +105,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
 
@@ -86,7 +126,7 @@
         MainParagraph.style.color = "white";
 
         // create variables for messages and set it as main paragraph content
-        let Welcome_Message = 'Hello, this webpage is operated by a computer programming duo, Dolapo and Jin!';
+        let Welcome_Message = 'Hello, this webpage is operated by a computer programming duo, Kingsly and Jin!';
         let description = 'We are based on Oshawa, Ontario and 2nd-year students of Computer Programming at Durham College.' +
                             '<br/>Using our various project experiences, we provide services that suit our customers\' tastes.';
         MainParagraph.innerHTML = Welcome_Message + '<br/>' + description;
@@ -108,7 +148,7 @@
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
     }
@@ -122,12 +162,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link active" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link active" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
         //ensure to get and create the elements needed for the sections, paragraphs and images.
@@ -197,12 +237,12 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
 
@@ -295,6 +335,61 @@
         MainContent.appendChild(Third_Section);
     }
 
+    function ContactFormValidation(){
+
+        ValidateField("#fullName",
+            /^([A-Z][a-z]{1,3}\.?\s)?([A-Z][a-z]+)+([\s,-]([A-Z][a-z]+))*$/,
+            "Please enter a valid firstname and lastname (ex. Mr. Harry Potter)");
+
+        ValidateField("#contactNumber",
+            /^(\+\d{1,3}[\s-.])?\(?\d{3}\)?[\s-.]?\d{3}[\s-.]\d{4}$/,
+            "Please enter a valid contact phone number (ex. 416-836-9876)");
+
+        ValidateField("#emailAddress",
+            /^[a-zA-Z0-9._-]{8,}\@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,10}$/,
+            "Please enter a valid email address (ex. username@isp.com)");
+
+        ValidateField("#firstName",
+            /^([A-Z])?([A-Z][a-z]+)*$/,
+            "Please enter a valid firstname (ex. Harry)");
+
+        ValidateField("#lastName",
+            /^([A-Z])?([A-Z][a-z]+)*$/,
+            "Please enter a valid lastname (ex. Potter)");
+
+        ValidateField("#password",
+            /[\w\!\@\#\$\%\^\&\*\(\)]{6,}/,
+            "Please enter a password as least 6 characters long");
+
+        ValidateField("#confirmPassword",
+            null,
+            "Your passwords do not match");
+    }
+
+    function ValidateField(input_field_id, regular_expression, error_message) {
+
+        let messageArea = $("#messageArea");
+
+        $(input_field_id).on("blur", function () {
+
+            //regular expression for confirmPassword has to be updated after the password has presumably been changed
+            if(input_field_id === "#confirmPassword"){
+                regular_expression = new RegExp(document.querySelector("#password").value)
+            }
+            //this means the element fullName
+            let inputFieldText = $(this).val();
+            if (!regular_expression.test(inputFieldText)) {
+                // fail validation
+                $(this).trigger("focus").trigger("select");
+                messageArea.addClass("alert alert-danger").text(error_message).show();
+            } else {
+                // pass validation
+                messageArea.removeAttr("class").hide();
+            }
+        });
+    }
+
+
 
     /**
      * It is called when the current page's title is Contact Us.
@@ -305,13 +400,15 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="../project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+        ContactFormValidation();
 
         // get the send button element
         let sendButton = document.getElementById("sendButton");
@@ -330,7 +427,7 @@
                 location.href = "contact-list.html";
             }
             // after 3 seconds, redirect to the home page
-            setTimeout("location.href='https://jinkim1006.github.io/Assignment/index.html'", 3000);
+            setTimeout("location.href='../index.html'", 3000);
         });
     }
 
@@ -374,12 +471,14 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="../project.html">
+                            <i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="../humanResource.html">' +
+                                    '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
         // create main section
@@ -408,7 +507,7 @@
         SecondParagraph.innerHTML = `We are Programmers who are always looking for ways to solve your problems`;
         // create an image tag and assign the image with its size
         let SecondImage = document.createElement("img");
-        SecondImage.src= "Images/aboutus.png";
+        SecondImage.src= "Images/aboutus.jpg";
         SecondImage.style.width = "800px";
         SecondImage.style.height = "500px";
         // div section includes second image and second paragraph
@@ -428,14 +527,158 @@
 
         // change the product's link to project page
         let product = document.getElementsByTagName("li")[1];
-        product.innerHTML = `<a class="nav-link" href="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>`;
+        product.innerHTML = `<a class="nav-link" href="../project.html">
+                                <i class="fa-solid fa-diagram-project"></i> Project</a>`;
 
         // add a nav bar element human resource
         let Contact_Us = document.getElementsByTagName("li")[4];
         let Human_Resources = document.createElement("a");
-        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="humanResource.html"><i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="../humanResource.html">' +
+                                    '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
 
+    }
+
+    function DisplayRegisterPage(){
+        console.log("Display Register Page Called!");
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="../project.html">
+                                <i class="fa-solid fa-diagram-project"></i> Project</a>`;
+
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="../humanResource.html">' +
+            '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+
+        let messageArea = $("#messageArea");
+        messageArea.hide();
+
+        ContactFormValidation();
+        $("#submitButton").on("click", (event) => {
+            // prevent the default behavior
+            event.preventDefault();
+
+            if(firstName.value !== "" &&
+                lastName.value !== "" &&
+                emailAddress.value !== "" &&
+                password.value !== "" &&
+                confirmPassword.value !== ""){
+
+                let user = new core.User(firstName.value,
+                    lastName.value,
+                    firstName.value + lastName.value,
+                    emailAddress.value,
+                    password.value);
+                console.log(user);
+
+                firstName.value = "";
+                lastName.value = "";
+                emailAddress.value = "";
+                password.value = "";
+                confirmPassword.value = "";
+
+            } else{
+                console.log("failed")
+            }
+
+
+
+        })
+
+
+    }
+
+
+    function DisplayLoginPage(){
+        console.log("Display Login Page Called!");
+        let product = document.getElementsByTagName("li")[1];
+        product.innerHTML = `<a class="nav-link" href="../project.html">
+                                <i class="fa-solid fa-diagram-project"></i> Project</a>`;
+
+        // add a nav bar element human resource
+        let Contact_Us = document.getElementsByTagName("li")[4];
+        let Human_Resources = document.createElement("a");
+        Human_Resources.innerHTML = '<a class="nav-link active" aria-current="page" href="../humanResource.html">' +
+            '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
+        Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
+
+
+
+
+
+        let messageArea = $("#messageArea");
+        messageArea.hide();
+
+        ContactFormValidation();
+
+        $("#loginButton").on("click", function() {
+
+            //Check if the username "link" is already present in the navbar
+            if (document.querySelector("#nav-username-link") === null){
+
+                //If it's not, find the correct spot in the navbar and insert HTML consisting of a list item and anchor tag
+                let navbarContact = document.querySelector(`li:has(a[href="contact.html"])`);
+                let usernameNavHTML = `<li class="nav-item">
+                               <a class="nav-link" id="nav-username-link" href="#">
+                               </li>`;
+                navbarContact.insertAdjacentHTML("afterend", usernameNavHTML)
+            }
+
+            //find the username link in the navbar and update its text
+            document.querySelector("#nav-username-link").innerHTML =
+                `<i class=\"fa-solid fa-user-tag\"></i> ${username.value}</a>`;
+
+            let success = false;
+            let newUser = new core.User();
+
+            $.get("./data/user.json", function (data) {
+
+                for(const user of data.users){
+
+                    //check if the username and password
+                    if(username.value === user.Username && password.valueOf === user.Password)
+                    {
+                        newUser.fromJSON(user);
+                        success = true;
+                        break;
+                    }
+                }
+
+                if(success)
+                {
+                    // add user to session storage
+                    sessionStorage.setItem("user", newUser.serialize());
+                    messageArea.removeAttr("class").hide();
+
+                    // redirect user to secure area of the site.
+                    location.href = "contact-list.html";
+                }else{
+                    // they do not match
+                    $("#username").trigger("focus").trigger("select");
+                    messageArea.addClass("alert alert-danger").text("Error: Invalid Login Credentials").show();
+                }
+            });
+        });
+
+        $("#cancelButton").on("click", function(){
+            document.forms[0].reset();
+            location.href = "index.html";
+        });
+    }
+
+    function CheckLogin(){
+        if(sessionStorage.getItem("user"))
+        {
+            $("#login").html(`<a id="logout" class="nav-link" href="#">
+                            <i class="fa-solid fa-sign-out-alt"></i> Logout</a>`);
+        }
+        $("#logout").on("click", function() {
+            sessionStorage.clear();
+            location.href = "index.html";
+        });
     }
 
 })();
