@@ -578,7 +578,8 @@
                 AddUser(firstName.value, lastName.value, firstName.value + lastName.value,
                             emailAddress.value, password.value);
                 // print the registered user data in console window
-                console.log(core.User(firstName.value));
+                console.log(new core.User(firstName.value, lastName.value, firstName.value + lastName.value,
+                                            emailAddress.value, password.value));
 
                 // clear the form
                 document.forms[0].reset();
