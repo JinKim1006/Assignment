@@ -2,23 +2,26 @@
     "users" : [
         
         {
-            "DisplayName": "Harry Potter",
+            "FirstName": "Harry",
+            "LastName": "Potter",
             "EmailAddress" : "harry@dcmail.ca",
-            "UserName" : "potterHarry",
+            "Username" : "potterHarry",
             "Password" : "123456"
         },
 
         {
-            "DisplayName": "Tom Riddle",
+            "FirstName": "Tom",
+            "LastName": "Riddle",
             "EmailAddress" : "tom@dcmail.ca",
-            "UserName" : "riddleTom",
+            "Username" : "riddleTom",
             "Password" : "987654"
         },
 
         {
-            "DisplayName": "Jin Kim",
+            "FirstName": "Jin",
+            "LastName": "Kim",
             "EmailAddress" : "jin@dcmail.ca",
-            "UserName" : "kimJin",
+            "Username" : "kimJin",
             "Password" : "029384"
         }
 

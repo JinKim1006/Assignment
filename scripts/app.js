@@ -1,6 +1,6 @@
 // Name: Soljin Kim
 // Student ID: 100822773
-// Date: Jan 27, 2023
+// Date: Feb 24, 2023
 // ********************************
 
 "use strict";
@@ -17,6 +17,14 @@
     // place the fixed bottom nav bar at bottom position of page
     document.body.insertAdjacentHTML("beforeEnd", BottomNavBar);
 
+
+    function AddUser(firstName, lastName, username, emailAddress, password){
+        let user = new core.User(firstName, lastName, username, emailAddress, password);
+        if(user.serialize()){
+            let key = user.Username.substring(0,1) + Date.now();
+            localStorage.setItem(key, user.serialize());
+        }
+    }
 
     function AjaxRequest(method, url, callback){
         // STEP 1
@@ -57,7 +65,7 @@
     {
         console.log("App Started!"); // print the statement to check the process
         //AjaxRequest("GET", "header.html", LoadHeader);
-        CheckLogin();
+        //CheckLogin();
 
         switch(document.title)  // based on the title of the current page, calls a function
         {
@@ -566,33 +574,25 @@
                 password.value !== "" &&
                 confirmPassword.value !== ""){
 
-                let user = new core.User(firstName.value,
-                    lastName.value,
-                    firstName.value + lastName.value,
-                    emailAddress.value,
-                    password.value);
-                console.log(user);
+                // add user to local storage
+                AddUser(firstName.value, lastName.value, firstName.value + lastName.value,
+                            emailAddress.value, password.value);
+                // print the registered user data in console window
+                console.log(core.User(firstName.value));
 
-                firstName.value = "";
-                lastName.value = "";
-                emailAddress.value = "";
-                password.value = "";
-                confirmPassword.value = "";
+                // clear the form
+                document.forms[0].reset();
 
             } else{
-                console.log("failed")
+                console.log("failed");
             }
-
-
-
-        })
-
-
+        });
     }
 
 
     function DisplayLoginPage(){
         console.log("Display Login Page Called!");
+
         let product = document.getElementsByTagName("li")[1];
         product.innerHTML = `<a class="nav-link" href="project.html">
                                 <i class="fa-solid fa-diagram-project"></i> Project</a>`;
@@ -603,10 +603,6 @@
         Human_Resources.innerHTML = '<a class="nav-link" aria-current="page" href="humanResource.html">' +
             '<i class="fa-solid fa-people-group"></i> Human Resources</a>';
         Contact_Us.insertAdjacentElement("beforebegin", Human_Resources);
-
-
-
-
 
         let messageArea = $("#messageArea");
         messageArea.hide();
@@ -619,26 +615,28 @@
             if (document.querySelector("#nav-username-link") === null){
 
                 //If it's not, find the correct spot in the navbar and insert HTML consisting of a list item and anchor tag
-                let navbarContact = document.querySelector(`li:has(a[href="contact.html"])`);
-                let usernameNavHTML = `<li class="nav-item">
-                               <a class="nav-link" id="nav-username-link" href="#">
-                               </li>`;
-                navbarContact.insertAdjacentHTML("afterend", usernameNavHTML)
+                // let navbarContact = document.querySelector(`li:has(a[href="contact.html"])`);
+                // let usernameNavHTML = `<li class="nav-item">
+                //                <a class="nav-link" id="nav-username-link" href="#">
+                //                </li>`;
+                // navbarContact.insertAdjacentHTML("afterend", usernameNavHTML);
+
+                /*// change the login text to logout
+                let navbarLogin = document.querySelector(`li a[href="login.html"]`);
+                navbarLogin.innerHTML = "<i class=\"fa-solid fa-arrow-left\"></i> Logout</a>";*/
             }
 
             //find the username link in the navbar and update its text
-            document.querySelector("#nav-username-link").innerHTML =
-                `<i class=\"fa-solid fa-user-tag\"></i> ${username.value}</a>`;
-
+            // document.querySelector("#nav-username-link").innerHTML =
+            //     `<i class=\"fa-solid fa-user-tag\"></i> ${username.value}</a>`;
             let success = false;
             let newUser = new core.User();
 
             $.get("./data/user.json", function (data) {
 
                 for(const user of data.users){
-
                     //check if the username and password
-                    if(username.value === user.Username && password.valueOf === user.Password)
+                    if(username.value === user.Username && password.value === user.Password)
                     {
                         newUser.fromJSON(user);
                         success = true;
@@ -652,13 +650,27 @@
                     sessionStorage.setItem("user", newUser.serialize());
                     messageArea.removeAttr("class").hide();
 
+                    // add username in navbar
+                    let navbarContact = document.querySelector(`li:has(a[href="contact.html"])`);
+                    let usernameNavHTML = `<li class="nav-item">
+                               <a class="nav-link" id="nav-username-link" href="#"></li>`;
+                    navbarContact.insertAdjacentHTML("afterend", usernameNavHTML);
+                    document.querySelector("#nav-username-link").innerHTML =
+                        `<i class=\"fa-solid fa-user-tag\"></i> ${username.value}</a>`;
+
+                    // change the login text to logout
+                    let navbarLogin = document.querySelector(`li a[href="login.html"]`);
+                    navbarLogin.innerHTML = "<i class=\"fa-solid fa-arrow-left\"></i> Logout</a>";
+
                     // redirect user to secure area of the site.
-                    location.href = "contact-list.html";
+                    // location.href = "contact-list.html";
                 }else{
-                    // they do not match
+                    // when they do not match, print error message
                     $("#username").trigger("focus").trigger("select");
                     messageArea.addClass("alert alert-danger").text("Error: Invalid Login Credentials").show();
                 }
+                // clear the form
+                document.forms[0].reset();
             });
         });
 
