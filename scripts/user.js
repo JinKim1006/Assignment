@@ -1,102 +1,73 @@
 "use strict";
-
-(function (core){
-
+var core;
+(function (core) {
     class User {
-        constructor(firstName="", lastName = "", username="", emailAddress="", password="") {
-            //this.setter = attribute
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.EmailAddress = emailAddress;
-            this.Username = username;
-            this.Password = password;
+        m_displayName;
+        m_emailAddress;
+        m_username;
+        m_password;
+        get DisplayName() {
+            return this.m_displayName;
         }
-
-        // setter and getter for firstName
-        set FirstName(firstName){
-            this.m_firstName = firstName;
+        set DisplayName(name) {
+            this.m_displayName = name;
         }
-        get FirstName(){
-            return this.m_firstName;
+        get EmailAddress() {
+            return this.m_emailAddress;
         }
-
-        // setter and getter for lastName
-
-        set LastName(lastName){
-            this.m_lastName = lastName;
+        set EmailAddress(email_address) {
+            this.m_emailAddress = email_address;
         }
-        get LastName(){
-            return this.m_lastName;
-        }
-
-        // setter and getter for emailAddress
-        set EmailAddress(emailAddress){
-            this.m_emailaddress = emailAddress;
-        }
-        get EmailAddress(){
-            return this.m_emailaddress;
-        }
-
-        // setter and getter for username
-        set Username(username){
-            this.m_username = username;
-        }
-        get Username(){
+        get Username() {
             return this.m_username;
         }
-
-        // setter and getter for password
-        set Password(password){
-            this.m_password = password;
+        set Username(username) {
+            this.m_username = username;
         }
-        get Password(){
+        get Password() {
             return this.m_password;
         }
-
-
+        set Password(password) {
+            this.m_password = password;
+        }
+        constructor(displayName = "", emailAddress = "", username = "", password = "") {
+            this.m_displayName = displayName;
+            this.m_emailAddress = emailAddress;
+            this.m_username = username;
+            this.m_password = password;
+        }
         toString() {
-            return `First Name: ${this.FirstName}
-        \nLast Name: ${this.LastName}
-        \nUsername: ${this.Username}
-        \nEmail: ${this.EmailAddress}`
+            return `Display Name    : ${this.DisplayName} \nEmail Address : ${this.EmailAddress} \nUsername : ${this.Username}`;
         }
-
-        toJSON(){
+        toJSON() {
             return {
-                "FirstName" : this.FirstName,
-                "LastName" : this.LastName,
-                "EmailAddress" : this.EmailAddress,
-                "Username" : this.Username,
-                "Password" : this.Password
-            }
+                "DisplayName": this.DisplayName,
+                "EmailAddress": this.EmailAddress,
+                "Username": this.Username
+            };
         }
-
-        fromJSON(data){
-            this.FirstName = data.FirstName;
-            this.LastName = data.LastName;
+        fromJSON(data) {
+            this.DisplayName = data.DisplayName;
             this.EmailAddress = data.EmailAddress;
             this.Username = data.Username;
             this.Password = data.Password;
         }
-
-
         serialize() {
-            if (this.FirstName !== "" && this.LastName !== "" && this.EmailAddress  !== "" &&  this.Username !== "" && this.Password !== "") {
-                return `${this.FirstName}, ${this.LastName}, ${this.EmailAddress}, ${this.Username}, ${this.Password}`;
+            if (this.DisplayName !== "" && this.EmailAddress !== "" && this.Username !== "") {
+                return `${this.DisplayName},${this.EmailAddress},${this.Username}`;
             }
-            console.error("Invalid serialization. Properties for user are invalid")
-            return null;
+            else {
+                console.error("One or more properties of the User is empty");
+                return null;
+            }
         }
-
         deserialize(data) {
             let propertyArray = data.split(",");
-            this.FirstName = propertyArray[0];
-            this.LastName = propertyArray[1];
-            this.EmailAddress = propertyArray[2];
-            this.Username = propertyArray[3];
-            this.Password = propertyArray[4];
+            this.DisplayName = propertyArray[0];
+            this.EmailAddress = propertyArray[1];
+            this.Username = propertyArray[2];
         }
     }
-
     core.User = User;
 })(core || (core = {}));
+//# sourceMappingURL=user.js.map
